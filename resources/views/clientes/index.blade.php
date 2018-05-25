@@ -35,7 +35,7 @@
                 @foreach ($data as $item)
                 <tr>
                   <td>{{$item->idclientes}}</td>
-                  <td>{{$item->nombre_compañia}}</td>
+                  <td>{{$item->nombre_compania}}</td>
                   <td>{{$item->telefono}}</td>
                   <td>{{$item->direccion}}</td>
                   <td>{{$item->user->name}}</td>

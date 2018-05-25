@@ -13,4 +13,13 @@ class Detalle_pedido extends Model
      */
     public $timestamps = false;
     protected $primaryKey = "iddetalle_pedido";
+	protected $table = "detalle_pedido";
+	
+    /**
+     * se obtiene el usuario relacionado
+     */
+    public function producto()
+    {
+        return $this->hasOne('App\Productos','idproductos', 'idproducto');
+    }
 }

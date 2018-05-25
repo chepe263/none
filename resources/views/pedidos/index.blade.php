@@ -30,6 +30,7 @@
                   <th>Estado</th>
                   <th>Costo envío</th>
                   <th></th>
+                  <th></th>
                   <th></th>                  
                 </tr>
                 @foreach ($data as $item)
@@ -39,6 +40,7 @@
                   <td>{{$item->costo}}</td>
                   <td>{{$item->idestado}}</td>
                   <td>{{$item->costo_envio}}</td>
+                  <td><a href="{{route('detalle_pedido_index',['idpedidos'=>$item->idpedidos])}}">Ver Productos</a></td>
                   <td><a href="{{route("pedidos_edit",["id"=>$item->idpedidos])}}">Editar</a></td>
                   <td>
                   

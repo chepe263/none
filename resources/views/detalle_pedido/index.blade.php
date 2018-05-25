@@ -2,7 +2,7 @@
 
 @section('content')
 
-<a href="{{route("detalle_pedido_create")}}">Crear</a>
+<a href="{{route("detalle_pedido_create", ['idpedidos' => $idpedidos])}}">Crear</a>
 <div class="row">
         <div class="col-xs-12">
           <div class="box">
@@ -26,19 +26,19 @@
                 <tr>
                   <th>Producto</th>
                   <th>Cantidad Productos</th>
-                  <th></th>
+                  <th>Costo</th>
                   <th></th>                  
                 </tr>
                 @foreach ($data as $item)
                 <tr>
-                  <td>tod</td>
-                  <td>todo</td>
-                  <td>{-- {$item->descripcion} --}</td>
-                  <td><a href="{{route("detalle_pedido_edit",["id"=>$item->iddetalle_pedido])}}">Editar</a></td>
+                  <td>{{ $item->producto->nombre }}</td>
+                  <td>{{ $item->cantidad_productos }}</td>
+                  <td>{{ $item->cantidad_productos * $item->producto->precio }}</td>
+                  <td><a href="{{route("detalle_pedido_edit",['idpedidos' => $idpedidos, "id"=>$item->iddetalle_pedido])}}">Editar</a></td>
                   <td>
                   
                   {!!Form::open(
-                    ['url' => route("detalle_pedido_destroy",["id"=>$item->iddetalle_pedido])
+                    ['url' => route("detalle_pedido_destroy",['idpedidos' => $idpedidos, "id"=>$item->iddetalle_pedido])
             ,"method"=>"delete"
             ]
                   )!!}

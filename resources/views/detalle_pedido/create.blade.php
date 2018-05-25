@@ -14,11 +14,11 @@
             <!-- /.box-header -->
             <!-- form start -->
             @if($editar==true)
-            {!!Form::model($data, ['url' => route("detalle_pedido_update",["id"=>$data->iddetalle_pedido])
+            {!!Form::model($data, ['url' => route("detalle_pedido_update",['idpedidos' => $idpedidos, "id"=>$data->iddetalle_pedido])
             ,"method"=>"put"
             ])!!}
             @else
-            {!!Form::open(['route' => "detalle_pedido_store"])!!}
+            {!!Form::open(['url' => route("detalle_pedido_store", ['idpedidos' => $idpedidos, ])])!!}
             @endif
               <div class="box-body">
                 <div class="form-group">

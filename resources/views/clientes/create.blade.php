@@ -23,10 +23,10 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="nombre">Nombre Compañia</label>
-                  {!! Form::text('nombre_compañia',null,["class"=>"form-control"])!!}
+                  {!! Form::text('nombre_compania',null,["class"=>"form-control"])!!}
 
-                   @if ($errors->has("nombre_compañia"))
-                  {{$errors->first("nombre_compañia")}}
+                   @if ($errors->has("nombre_compania"))
+                  {{$errors->first("nombre_compania")}}
                   @endif
                 </div>
                 <div class="form-group">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Detalle_pedido;
+use App\Productos;
 
 class Detalle_pedidoController extends Controller
 {
@@ -12,12 +13,13 @@ class Detalle_pedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($idpedidos)
     {
         $table= Detalle_pedido::all();
         //dd($table);
         return view('detalle_pedido.index',[
             "data"=>$table
+			,'idpedidos' => $idpedidos
         ]);
 
 
@@ -28,11 +30,13 @@ class Detalle_pedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($idpedidos)
     {
+		$listaproducto = Productos::all()->pluck("nombre", "idproductos");
         return view('detalle_pedido.create',[
             "editar"=>false,
-            "listausuarios"=> [] 
+            "listaproducto"=> $listaproducto 
+			,'idpedidos' => $idpedidos
         ]);
     }
 
@@ -40,30 +44,31 @@ class Detalle_pedidoController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $idpedidos
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $idpedidos)
     {
         $validatedData = $request->validate(
             $this->validationRules()
         );
 
         $table = new Detalle_pedido;
-        $table->iddetalle_pedido=$request->iddetalle_pedido;
-        $table->idpedido=$request->idpedido;
+        $table->idpedido=$idpedidos;
 		$table->idproducto=$request->idproducto;
 		$table->cantidad_productos=$request->cantidad_productos;
         $table->save();
-        return redirect()->route("detalle_pedido_index");
+        return redirect()->route("detalle_pedido_index", ['idpedidos' => $idpedidos]);
     }
 
     /**
      * Display the specified resource.
      *
+     * @param  int  $idpedidos
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idpedidos, $id)
     {
         //
     }
@@ -72,38 +77,41 @@ class Detalle_pedidoController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     * @param  int  $idpedidos
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($idpedidos, $id)
     {
         $table = Detalle_pedido::find($id);
+		$listaproducto = Productos::all()->pluck("nombre", "idproductos");
         return view('detalle_pedido.create',[
             "editar"=>true
             ,"data"=>$table
-            ,"listausuarios"=> [] 
+            ,"listaproducto"=> $listaproducto 
+			,'idpedidos' => $idpedidos
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $idpedidos
      * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update($id,Request $request )
+    public function update($idpedidos, $id,Request $request )
     {
         $validatedData = $request->validate(
             $this->validationRules()
         );
 
         $table = Detalle_pedido::find($id);
-       $table->iddetalle_pedido=$request->iddetalle_pedido;
-        $table->idpedido=$request->idpedido;
+        //$table->idpedido=$request->idpedido;
 		$table->idproducto=$request->idproducto;
 		$table->cantidad_productos=$request->cantidad_productos;
         $table->save();
-        return redirect()->route("detalle_pedido_index");
+        return redirect()->route("detalle_pedido_index", ['idpedidos' => $idpedidos]);
     }
 
     /**
@@ -112,11 +120,11 @@ class Detalle_pedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idpedidos,$id)
     {
         $table = Detalle_pedido::find($id);
         $table->delete();
-        return redirect()->route("detalle_pedido_index");
+        return redirect()->route("detalle_pedido_index", ['idpedidos' => $idpedidos]);
     }
 
     
@@ -130,11 +138,12 @@ class Detalle_pedidoController extends Controller
     {
         return [
 
-            "cantidad_productos"=>"required"
+            "cantidad_productos"=>"required|numeric|min:1"
             
 
             
 
         ];
     }
+	
 }

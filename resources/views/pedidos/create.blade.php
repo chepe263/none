@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends("layouts.admin")
 
-@section('content')
+@section("content")
 
 
 <div class="row"> 
@@ -23,23 +23,25 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="nombre">Cliente</label>
-                  {!! Form::select('idcliente',[],null,["class"=>"form-control"])!!}
+                  {!! Form::select('idcliente',$lista_clientes,null,["class"=>"form-control"])!!}
 
                    @if ($errors->has("idcliente"))
                   {{$errors->first("idcliente")}}
                   @endif
                 </div>
-                <div class="form-group">
-                  <label for="nombre">Costo</label>
-                  {!! Form::text('costo',null,["class"=>"form-control"])!!}
+					@if(isset($editar) && $editar==true)
+					<div class="form-group">
+					  <label for="nombre">Costo</label>
+					  {!! Form::text("costo",null,["class"=>"form-control", "readonly" => "readonly"])!!}
 
-                  @if ($errors->has("costo"))
-                  {{$errors->first("costo")}}
-                  @endif
-                </div>
+					  @if ($errors->has("costo"))
+					  {{$errors->first("costo")}}
+					  @endif
+					</div>
+				  @endif
 				<div class="form-group">
                   <label for="nombre">costo_envio</label>
-                  {!! Form::text('costo_envio',null,["class"=>"form-control"])!!}
+                  {!! Form::number("costo_envio", null , ["class"=>"form-control"]) !!}
 
                   @if ($errors->has("costo_envio"))
                   {{$errors->first("costo_envio")}}
@@ -47,7 +49,7 @@
                 </div>
 				<div class="form-group">
                   <label for="nombre">Estado</label>
-                  {!! Form::select('idestado',[],null,["class"=>"form-control"])!!}
+                  {!! Form::select("idestado",$lista_estados,null,["class"=>"form-control"])!!}
 
                   @if ($errors->has("idestado"))
                   {{$errors->first("idestado")}}

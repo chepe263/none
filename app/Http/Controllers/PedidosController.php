@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pedidos;
+use App\Clientes;
+use App\Estado;
+use DB;
 
 class PedidosController extends Controller
 {
@@ -18,6 +21,7 @@ class PedidosController extends Controller
         //dd($table);
         return view('pedidos.index',[
             "data"=>$table
+
         ]);
 
 
@@ -30,9 +34,12 @@ class PedidosController extends Controller
      */
     public function create()
     {
+		$clientes = Clientes::all()->pluck("nombre_compania", "idclientes");
+		$estados = Estado::all()->pluck("nombre", "idestados");
         return view('pedidos.create',[
-            "editar"=>false,
-            "listausuarios"=> [] 
+            "editar"=>false
+			,"lista_clientes"=> $clientes
+			,"lista_estados"=> $estados
         ]);
     }
 
@@ -51,9 +58,9 @@ class PedidosController extends Controller
         $table = new Pedidos;
         $table->idpedidos=$request->idpedidos;
         $table->idcliente=$request->idcliente;
-		$table->costo=$request->costo;
-		$table->idestado=$request->idestado;
-		$table->costo_envio=$request->costo_envio;
+		$table->costo=0; //$request->costo;
+		$table->idestado= $request->idestado;
+		$table->costo_envio= 25; //$request->costo_envio;
         $table->save();
         return redirect()->route("pedidos_index");
     }
@@ -78,10 +85,13 @@ class PedidosController extends Controller
     public function edit($id)
     {
         $table = Pedidos::find($id);
+		$clientes = Clientes::all()->pluck("nombre_compania", "idclientes");
+		$estados = Estado::all()->pluck("nombre", "idestados");
         return view('pedidos.create',[
             "editar"=>true
             ,"data"=>$table
-            ,"listausuarios"=> [] 
+            ,"lista_clientes"=> $clientes
+			,"lista_estados"=> $estados
         ]);
     }
 
@@ -99,9 +109,9 @@ class PedidosController extends Controller
         );
 
         $table = Pedidos::find($id);
-         $table->idpedidos=$request->idpedidos;
+        //$table->idpedidos=$request->idpedidos;
         $table->idcliente=$request->idcliente;
-		$table->costo=$request->costo;
+		//$table->costo=$request->costo;
 		$table->idestado=$request->idestado;
 		$table->costo_envio=$request->costo_envio;
         $table->save();
@@ -132,8 +142,8 @@ class PedidosController extends Controller
     {
         return [
 
-            "costo"=>"required"
-            , "costo_envio"=>"required"
+            //"costo"=>"required"
+             "costo_envio"=>"required|numeric"
 		
 
             

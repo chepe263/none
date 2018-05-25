@@ -53,7 +53,7 @@ class ClientesController extends Controller
         $table = new Clientes;
         $table->telefono=$request->telefono;
         $table->direccion=$request->direccion;
-		$table->nombre_compañia=$request->nombre_compañia;
+		$table->nombre_compania=$request->nombre_compania;
         $table->save();
         return redirect()->route("clientes_index");
     }
@@ -103,7 +103,7 @@ class ClientesController extends Controller
         $table = Clientes::find($id);
         $table->telefono=$request->telefono;
         $table->direccion=$request->direccion;
-        $table->nombre_compañia=$request->nombre_compañia;
+        $table->nombre_compania=$request->nombre_compania;
         $table->idusuario=$request->idusuario;
         $table->save();
         return redirect()->route("clientes_index");
@@ -135,7 +135,7 @@ class ClientesController extends Controller
 
             "telefono"=>"required"
             , "direccion"=>"required"
-			, "nombre_compañia"=>"required"
+			, "nombre_compania"=>"required"
 
             
 
