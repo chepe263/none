@@ -53,6 +53,7 @@ class ClientesController extends Controller
         $table = new Clientes;
         $table->telefono=$request->telefono;
         $table->direccion=$request->direccion;
+		$table->idusuario=$request->idusuario;
 		$table->nombre_compania=$request->nombre_compania;
         $table->save();
         return redirect()->route("clientes_index");
