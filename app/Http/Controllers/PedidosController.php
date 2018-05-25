@@ -56,13 +56,14 @@ class PedidosController extends Controller
         );
 
         $table = new Pedidos;
-        $table->idpedidos=$request->idpedidos;
+        //$table->idpedidos=$request->idpedidos;
         $table->idcliente=$request->idcliente;
 		$table->costo=0; //$request->costo;
 		$table->idestado= $request->idestado;
 		$table->costo_envio= 25; //$request->costo_envio;
         $table->save();
-        return redirect()->route("pedidos_index");
+        //return redirect()->route("pedidos_index");
+        return redirect()->route("detalle_pedido_create", ['idpedidos' => $table->idpedidos]);
     }
 
     /**
