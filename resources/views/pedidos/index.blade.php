@@ -32,15 +32,21 @@
                   <th></th>
                   <th></th>
                   <th></th>                  
+                  <th></th>                  
                 </tr>
                 @foreach ($data as $item)
                 <tr>
                   <td>{{$item->idpedidos}}</td>
-                  <td>{{$item->idcliente}}</td>
+                  <td>{{$item->cliente->nombre_compania}}</td>
                   <td>{{$item->costo}}</td>
-                  <td>{{$item->idestado}}</td>
+                  <td>{{$item->estado->nombre}}</td>
                   <td>{{$item->costo_envio}}</td>
                   <td><a href="{{route('detalle_pedido_index',['idpedidos'=>$item->idpedidos])}}">Ver Productos</a></td>
+                  <td>
+					@if($item->detalle->count() > 0)
+						<a href="{{route("pedidos_invoice",["id"=>$item->idpedidos])}}">Recibo</a>
+					@endif
+				  </td>
                   <td><a href="{{route("pedidos_edit",["id"=>$item->idpedidos])}}">Editar</a></td>
                   <td>
                   

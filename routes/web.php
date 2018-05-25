@@ -10,6 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+
+
+Route::get('pedidos/invoice/{id}', 'PedidosController@getInvoice')->name('pedidos_invoice');
 Route::get('pedidos/index', 'PedidosController@index')->name('pedidos_index');
 Route::get('pedidos/create', 'PedidosController@create')->name('pedidos_create');
 Route::post('pedidos/store', 'PedidosController@store')->name('pedidos_store');

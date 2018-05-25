@@ -131,7 +131,11 @@ class PedidosController extends Controller
         return redirect()->route("pedidos_index");
     }
 
-    
+	public function getInvoice($id)
+	{
+		$table = Pedidos::find($id);
+		return view('pedidos.invoice',["data" => $table]);
+	}
     /**
      * Devuelve conjunto de reglas para validaciones
      *

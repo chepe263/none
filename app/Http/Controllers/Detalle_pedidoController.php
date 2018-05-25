@@ -15,7 +15,7 @@ class Detalle_pedidoController extends Controller
      */
     public function index($idpedidos)
     {
-        $table= Detalle_pedido::all();
+        $table= Detalle_pedido::where('idpedido', $idpedidos)->get();
         //dd($table);
         return view('detalle_pedido.index',[
             "data"=>$table
