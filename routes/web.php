@@ -14,6 +14,18 @@
 
 
 Route::middleware(['auth'])->group(function () {
+	Route::get("mapa", function(){
+		return view("mapa");
+		
+		})->name("mapa");
+
+	Route::get("calendario", function(){
+	return view("calendario");
+
+	})->name("calendario");
+
+	Route::get("reporte/clientes", "ReporteController@clientes")->name("reporte_clientes");
+
 	Route::get('pedidos/invoice/{id}', 'PedidosController@getInvoice')->name('pedidos_invoice');
 	Route::get('pedidos/index', 'PedidosController@index')->name('pedidos_index');
 	Route::get('pedidos/create', 'PedidosController@create')->name('pedidos_create');
@@ -43,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::put('productos/update/{id}', 'ProductosController@update')->name('productos_update');
 	Route::delete('productos/destroy/{id}', 'ProductosController@destroy')->name('productos_destroy');
 
+	Route::get('clientes/pedido_nuevo/{idcliente}', 'ClientesController@getPedidoNuevo')->name('clientes_pedido_nuevo');
 	Route::get('clientes/index', 'ClientesController@index')->name('clientes_index');
 	Route::get('clientes/create', 'ClientesController@create')->name('clientes_create');
 	Route::post('clientes/store', 'ClientesController@store')->name('clientes_store');

@@ -17,8 +17,8 @@ class Clientes extends Model
         /**
      * se obtiene el usuario relacionado
      */
-    public function user()
+    /*public function user()
     {
         return $this->hasOne('App\User','id', 'idusuario');
-    }
+    }*/
 }

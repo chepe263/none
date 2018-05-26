@@ -33,9 +33,15 @@
                   <th></th>
                   <th></th>                  
                   <th></th>                  
-                </tr>
+                </tr> 
                 @foreach ($data as $item)
-                <tr>
+                <tr 
+                class="
+                @if( request()->input("idpedidos") == $item->idpedidos )
+                table-primary primary
+                @endif
+                
+                ">
                   <td>{{$item->idpedidos}}</td>
                   <td>{{$item->cliente->nombre_compania}}</td>
                   <td>{{$item->costo}}</td>

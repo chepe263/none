@@ -19,7 +19,7 @@
           <address>
             <strong>{{ $data->cliente->nombre_compania }}</strong><br>
             {{ $data->cliente->direccion }}<br>
-            Email: {{ $data->cliente->user->email }}
+            
           </address>
         </div>
         <!-- /.col -->

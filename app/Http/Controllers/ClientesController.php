@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Clientes;
 use App\User;
+use App\Pedidos;
 
 class ClientesController extends Controller
 {
@@ -31,10 +32,10 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        $listausuarios = User::all()->pluck('name','id');
+        //$listausuarios = User::all()->pluck('name','id');
         return view('clientes.create',[
             "editar"=>false,
-            "listausuarios"=> $listausuarios 
+            //"listausuarios"=> $listausuarios 
         ]);
     }
 
@@ -51,9 +52,11 @@ class ClientesController extends Controller
         );
 
         $table = new Clientes;
+        $table->nombre=$request->nombre;
+        $table->apellido=$request->apellido;
         $table->telefono=$request->telefono;
         $table->direccion=$request->direccion;
-		$table->idusuario=$request->idusuario;
+		//$table->idusuario=$request->idusuario;
 		$table->nombre_compania=$request->nombre_compania;
         $table->save();
         return redirect()->route("clientes_index");
@@ -80,11 +83,11 @@ class ClientesController extends Controller
     {
         $table = Clientes::find($id);
 
-        $listausuarios = User::all()->pluck('name','id');
+        //$listausuarios = User::all()->pluck('name','id');
         return view('clientes.create',[
             "editar"=>true
             ,"data"=>$table
-            ,"listausuarios"=> $listausuarios
+            //,"listausuarios"=> $listausuarios
         ]);
     }
 
@@ -102,10 +105,12 @@ class ClientesController extends Controller
         );
 
         $table = Clientes::find($id);
+        $table->nombre=$request->nombre;
+        $table->apellido=$request->apellido;
         $table->telefono=$request->telefono;
         $table->direccion=$request->direccion;
         $table->nombre_compania=$request->nombre_compania;
-        $table->idusuario=$request->idusuario;
+        //$table->idusuario=$request->idusuario;
         $table->save();
         return redirect()->route("clientes_index");
     }
@@ -123,7 +128,17 @@ class ClientesController extends Controller
         return redirect()->route("clientes_index");
     }
 
-    
+    public function getPedidoNuevo($idcliente)    
+    {
+        $table = new Pedidos;
+        //$table->idpedidos=$request->idpedidos;
+        $table->idcliente=$idcliente;
+		$table->costo=0; //$request->costo;
+		$table->idestado= env('PEDIDO_ESTADO_INICIAL_ID', 2);
+		$table->costo_envio= 25; //$request->costo_envio;
+        $table->save();
+        return redirect()->route("detalle_pedido_create", ['idpedidos' => $table->idpedidos]);
+    }
     /**
      * Devuelve conjunto de reglas para validaciones
      *
@@ -137,8 +152,8 @@ class ClientesController extends Controller
             "telefono"=>"required"
             , "direccion"=>"required"
 			, "nombre_compania"=>"required"
-
-            
+			, "nombre"=>"required"
+			, "apellido"=>"required"           
 
         ];
     }

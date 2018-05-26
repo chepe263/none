@@ -21,6 +21,22 @@
             {!!Form::open(['route' => "clientes_store"])!!}
             @endif
               <div class="box-body">
+              <div class="form-group">
+                  <label for="nombre">Nombre</label>
+                  {!! Form::text('nombre',null,["class"=>"form-control"])!!}
+
+                   @if ($errors->has("nombre"))
+                  {{$errors->first("nombre")}}
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="nombre">Apellido</label>
+                  {!! Form::text('apellido',null,["class"=>"form-control"])!!}
+
+                   @if ($errors->has("apellido"))
+                  {{$errors->first("apellido")}}
+                  @endif
+                </div>
                 <div class="form-group">
                   <label for="nombre">Nombre Compañia</label>
                   {!! Form::text('nombre_compania',null,["class"=>"form-control"])!!}
@@ -45,6 +61,7 @@
                   {{$errors->first("direccion")}}
                   @endif
                 </div>
+                {{--
 				<div class="form-group">
                   <label for="nombre">Usuario</label>
                   {!! Form::select('idusuario',$listausuarios, null,["class"=>"form-control"])!!}
@@ -53,6 +70,7 @@
                   {{$errors->first("idusuario")}}
                   @endif
                 </div>
+              --}}
               </div>
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Guardar</button>

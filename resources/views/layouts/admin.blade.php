@@ -34,7 +34,9 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-
+  <!-- fullCalendar -->
+  <link rel="stylesheet" href="/bower_components/fullcalendar/dist/fullcalendar.min.css">
+  <link rel="stylesheet" href="/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -72,7 +74,7 @@
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="/dist/img/usuario.png" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team
@@ -259,13 +261,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="/dist/img/usuario.png" class="user-image" alt="User Image">
               <span class="hidden-xs">{{ \Auth::user()->name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="/dist/img/usuario.png" class="img-circle" alt="User Image">
 
                 <p>
                   {{ \Auth::user()->name }}
@@ -316,7 +318,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="/dist/img/usuario.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{ \Auth::user()->name }}</p>
@@ -343,22 +345,24 @@
             <li class="active hidden"><a href="{{ route('estado_index') }}"><i class="fa fa-circle-o"></i> </a></li>
           </ul>
         </li>
-		@if(false)
+        <li class="active"><a href="{{ route('calendario') }}"><i class="fa fa-calendar-o"></i> Calendario</a></li>
+        <li class="active"><a href="{{ route('mapa') }}"><i class="fa fa-globe"></i> Rutas</a></li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
+            <span>Reportes</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+            <li><a href="{{ route("reporte_clientes") }}"><i class="fa fa-circle-o"></i> Clientes</a></li>
             <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
             <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
             <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
           </ul>
         </li>
+        @if(false)
         <li>
           <a href="pages/widgets.html">
             <i class="fa fa-th"></i> <span>Widgets</span>

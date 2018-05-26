@@ -3,6 +3,14 @@
 @section('content')
 
 <a href="{{route("detalle_pedido_create", ['idpedidos' => $idpedidos])}}">Crear</a>
+
+<a href="{{route("pedidos_index", ['idpedidos' => $idpedidos])}}">Listo</a>
+
+@if(count( $data ) > 0)
+      <p>
+       <a href="{{route("pedidos_invoice",["id"=>$idpedidos])}}">Recibo</a>
+      </p>
+    @endif
 <div class="row">
         <div class="col-xs-12">
           <div class="box">
@@ -29,8 +37,9 @@
                   <th>Costo</th>
                   <th></th>                  
                 </tr>
+                
                 @foreach ($data as $item)
-                <tr>
+                <tr >
                   <td>{{ $item->producto->nombre }}</td>
                   <td>{{ $item->cantidad_productos }}</td>
                   <td>{{ $item->cantidad_productos * $item->producto->precio }}</td>
